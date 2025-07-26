@@ -1,5 +1,6 @@
 package com.javarush.bulimova.controller;
 
+import com.javarush.bulimova.constants.Constants;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +15,8 @@ public class Front extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("GET: " + req.getRequestURI()); // для отладки
         HttpSession currentSession = req.getSession(true);
-        getServletContext().getRequestDispatcher("/start.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/welcome.jsp").forward(req, resp);
+
     }
 
 }
