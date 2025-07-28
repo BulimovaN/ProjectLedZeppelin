@@ -10,7 +10,7 @@ public class DemoQuestFactory {
                 new Quest.Step("Инопланетянин протягивает руку. Что делать?", "Пожать руку", "Спрятаться"),
                 new Quest.Step("Он предлагает полететь с ним. Что делать?", "Согласиться", "Отказаться")
         );
-        List<Integer> correct = Arrays.asList(1, 1, 1);
-        return new Quest("Приключение с НЛО", steps, correct);
+        List<Integer> correct = Arrays.asList(0, 0, 0);
+        return new Quest("Приключение с НЛО \uD83C\uDF1A", steps, correct);
     }
 }
