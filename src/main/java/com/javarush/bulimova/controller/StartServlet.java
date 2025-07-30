@@ -16,7 +16,11 @@ import java.util.List;
 public class StartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
         String questIndexParam = req.getParameter("questIndex");
 
         if (questIndexParam == null) {
@@ -24,14 +28,28 @@ public class StartServlet extends HttpServlet {
             return;
         }
 
-        int questIndex = Integer.parseInt(questIndexParam);
+
+        int selectedQuestIndex = Integer.parseInt(questIndexParam);
         List<Quest> quests = QuestStorage.getQuests();
-        Quest quest = quests.get(questIndex);
+        Quest quest = quests.get(selectedQuestIndex);
 
-        session.setAttribute("questIndex", questIndex);
-        session.setAttribute("stepIndex", 0);
+        Integer savedQuestIndex = (Integer) session.getAttribute("questIndex");
+        Integer savedStepIndex = (Integer) session.getAttribute("stepIndex");
 
-        Quest.Step step = quest.getSteps().get(0);
+        int stepIndex;
+        if (savedQuestIndex != null && savedQuestIndex == selectedQuestIndex && savedStepIndex != null) {
+            stepIndex = savedStepIndex;
+        } else {
+            stepIndex = 0;
+            session.setAttribute("questIndex", selectedQuestIndex);
+            session.setAttribute("questName", quest.getName());
+        }
+
+
+        session.setAttribute("stepIndex", stepIndex);
+        session.setAttribute("stepNumber", stepIndex + 1);
+
+        Quest.Step step = quest.getSteps().get(stepIndex);
         req.setAttribute("question", step.getQuestion());
         req.setAttribute("answer1", step.getAnswer1());
         req.setAttribute("answer2", step.getAnswer2());
