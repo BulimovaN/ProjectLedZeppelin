@@ -11,6 +11,6 @@ public class DemoQuestFactory {
                 new Quest.Step("Он предлагает полететь с ним. Что делать?", "Согласиться", "Отказаться")
         );
         List<Integer> correct = Arrays.asList(0, 0, 0);
-        return new Quest("Приключение с НЛО \uD83D\uDC7D", steps, correct);
+        return new Quest("Приключение с НЛО \uD83D\uDC7D!", steps, correct);
     }
 }
