@@ -19,5 +19,10 @@
 <% if (request.getAttribute("error") != null) { %>
 <p style="color:red;"><%= request.getAttribute("error") %></p>
 <% } %>
+<a href="register.jsp">Нет аккаунта? Зарегистрироваться</a>
+<br/><br/>
+<form action="/" method="get" style="display:inline;">
+    <button type="submit">Home</button>
+</form>
 </body>
 </html>

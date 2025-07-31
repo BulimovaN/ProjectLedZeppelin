@@ -14,4 +14,11 @@ public class UserStore {
     public static boolean isValid(String username, String password) {
         return password.equals(users.get(username));
     }
+    public static boolean register(String username, String password) {
+        if (users.containsKey(username)) {
+            return false;
+        }
+        users.put(username, password);
+        return true;
+    }
 }
