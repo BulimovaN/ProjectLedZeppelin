@@ -8,7 +8,7 @@ public class UserStore {
 
     static {
         users.put("admin", "12345");
-        users.put("user", "1111");
+        users.put("user", "11111");
     }
 
     public static boolean isValid(String username, String password) {
